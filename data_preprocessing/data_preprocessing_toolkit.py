@@ -36,7 +36,7 @@ class DataPreprocessingToolkit(object):
         return df
 
     def add_length_of_stay(self, df):
-        # Write your code here
+        df.loc[:, "length_of_stay"] = (df["date_to"] - df["date_from"]).dt.days
         return df
 
     def add_book_to_arrival(self, df):
@@ -56,7 +56,7 @@ class DataPreprocessingToolkit(object):
         return df
 
     def add_night_price(self, df):
-        # Write your code here
+        df.loc[:, "night_price"] = np.round(df["accomodation_price"] / df["length_of_stay"] / df["n_rooms"], 2)
         return df
 
     def clip_book_to_arrival(self, df):
